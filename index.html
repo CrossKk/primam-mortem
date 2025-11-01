@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="la">
+<head>
+  <meta charset="UTF-8">
+  <title>dn</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      font-family: 'EB Garamond', serif;
+      background-color: #000;
+      color: #000;
+    }
+
+    body {
+      background-image: url("Selena.jpg"); /* 🔥 Nome do arquivo da imagem */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(circle at 50% 80%, rgba(255, 0, 0, 0.6), transparent 70%),
+        radial-gradient(circle at 30% 40%, rgba(255, 100, 0, 0.4), transparent 80%),
+        radial-gradient(circle at 70% 60%, rgba(255, 50, 0, 0.3), transparent 90%);
+      mix-blend-mode: overlay;
+      animation: chamas 2s infinite alternate ease-in-out;
+      z-index: 1;
+    }
+
+    @keyframes chamas {
+      0% {
+        opacity: 0.6;
+        filter: brightness(1);
+        transform: scale(1);
+      }
+      100% {
+        opacity: 1;
+        filter: brightness(1.5);
+        transform: scale(1.05);
+      }
+    }
+
+    .texto {
+      position: absolute;
+      bottom: 5%;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      font-size: 1.8em;
+      line-height: 1.4em;
+      letter-spacing: 1px;
+      color: #000;
+      text-shadow: 0 0 4px #f55, 0 0 8px rgba(255, 0, 0, 0.4);
+      z-index: 2;
+      max-width: 90%;
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="texto">
+    Que sua insanidade queime junto de sua carne profana.<br>
+    E jamais ouse espalhar seus ensinamentos corroídos<br>
+    por esta terra sagrada novamente.
+  </div>
+
+  <!--  -->
+  <audio id="bgAudio" autoplay loop>
+    <source src="Audioai.rapido.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // Alguns navegadores bloqueiam o autoplay até haver interação do usuário.
+    // Esse script força o áudio a tocar assim que possível.
+    window.addEventListener('load', function() {
+      const audio = document.getElementById('bgAudio');
+      const playAudio = () => {
+        audio.play().catch(() => {
+          // caso o autoplay seja bloqueado, tenta novamente ao primeiro clique
+          document.body.addEventListener('click', () => audio.play(), { once: true });
+        });
+      };
+      playAudio();
+    });
+  </script>
+</body>
+</html>
